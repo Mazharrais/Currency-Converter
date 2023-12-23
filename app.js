@@ -20,6 +20,7 @@ const dropdowns = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
 const toCurr = document.querySelector(".to select");
+const msg = document.querySelector(".msg");
 
 
 
@@ -64,6 +65,11 @@ if(amtVal === "" || amtVal < 1) {
 //console.log(fromCurr.value, toCurr.value);
 const URL = `${Base_URL}/${fromCurr.value.toLowerCase()}/${toCurr.value.toLowerCase()}.json`;
 let response = await fetch(URL);
-console.log(response);
+let data = await response.json();
+let rate = data[toCurr.value.toLowerCase()];
+
+console.log(rate);
+let finalAmount = amtVal * rate;
+msg.innerText = `${amtVal} ${fromCurr.value} = ${finalAmount} ${toCurr.value}`
 
 });

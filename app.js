@@ -14,10 +14,14 @@
 // button.addEventListener("click", getFacts);
 
 
-const Base_URL = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/pkr.json";
+const Base_URL = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies";
 
 const dropdowns = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
+const fromCurr = document.querySelector(".from select");
+const toCurr = document.querySelector(".to select");
+
+
 
 for(let select of dropdowns){
   
@@ -45,17 +49,21 @@ const updateFlag = (element) => {
   let img = element.parentElement.querySelector("img");
   img.src = newSrc
 
-  console.log(img.src);
 }
 
-btn.addEventListener("click", (evt) => {
+btn.addEventListener("click", async (evt) => {
 evt.preventDefault();
 let amount = document.querySelector(".amount input");
 let amtVal = amount.value;
-console.log(amtVal);
 if(amtVal === "" || amtVal < 1) {
   amtVal = 1;
   amount.value = "1"
   
 }
+
+//console.log(fromCurr.value, toCurr.value);
+const URL = `${Base_URL}/${fromCurr.value.toLowerCase()}/${toCurr.value.toLowerCase()}.json`;
+let response = await fetch(URL);
+console.log(response);
+
 });

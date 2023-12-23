@@ -62,7 +62,7 @@ if(amtVal === "" || amtVal < 1) {
   
 }
 
-//console.log(fromCurr.value, toCurr.value);
+
 const URL = `${Base_URL}/${fromCurr.value.toLowerCase()}/${toCurr.value.toLowerCase()}.json`;
 let response = await fetch(URL);
 let data = await response.json();
